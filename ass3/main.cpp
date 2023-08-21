@@ -58,7 +58,8 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
     zNear = abs(zNear);
     zFar = abs(zFar);
     eye_fov = eye_fov * MY_PI / 180.f;
-    float yTop = abs(zNear) * tan(eye_fov / 2);
+    // 将yTop取负数，从而将z轴反转
+    float yTop = -zNear * tan(eye_fov / 2);
     float yBottom = -yTop;
     float xRight = aspect_ratio * yTop;
     float xLeft = -xRight;
