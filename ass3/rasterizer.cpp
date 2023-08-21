@@ -279,7 +279,7 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eig
     float bottom = fmin(fmin(v[0].y(), v[1].y()), v[2].y());
     float top = fmax(fmax(v[0].y(), v[1].y()), v[2].y());
 
-    const Vector3f* _v = new Vector3f[3]{t.v[0], t.v[1], t.v[2]};
+    const Vector3f* _v = new Vector3f[3]{v[0].head<3>(), v[1].head<3>(), v[2].head<3>()};
     for (int x = left; x < right; x++) {
         for (int y = bottom; y < top; y++) {
             if (insideTriangle(x, y, _v)) {
@@ -294,10 +294,12 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eig
                 zp *= Z;
 
                 // TODO: Interpolate the attributes:
-                auto interpolated_color = alpha * t.color[0] + beta * t.color[1] + gamma * t.color[2];
-                auto interpolated_normal = alpha * t.normal[0] + beta * t.normal[1] + gamma * t.normal[2];
-                auto interpolated_texcoords = alpha * t.tex_coords[0] + beta * t.tex_coords[1] + gamma * t.tex_coords[2];
-                auto interpolated_shadingcoords = ;
+                auto interpolated_color = interpolate(alpha, beta, gamma, t.color[0], t.color[1], t.color[2], 1);
+                auto interpolated_normal = interpolate(alpha, beta, gamma, t.normal[0], t.normal[1], t.normal[2], 1).normalized();
+                auto interpolated_texcoords = interpolate(alpha, beta, gamma, t.tex_coords[0], t.tex_coords[1], t.tex_coords[2], 1);
+                //view_pos[]是三角形顶点在view space中的坐标,插值是为了还原在camera space中的坐标
+                //详见http://games-cn.org/forums/topic/zuoye3-interpolated_shadingcoords/
+                auto interpolated_shadingcoords = interpolate(alpha, beta, gamma, view_pos[0], view_pos[1], view_pos[2], 1);
 
                 fragment_shader_payload payload(interpolated_color, interpolated_normal.normalized(), interpolated_texcoords, texture ? &*texture : nullptr);
                 payload.view_pos = interpolated_shadingcoords;
@@ -313,12 +315,8 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eig
                     set_pixel(current_pixel, pixel_color);
                 }
             }
-            // else {
-            //     continue;
-            // }
         }
     }
-    // 作业2
 
     // TODO: From your HW3, get the triangle rasterization code.
     // TODO: Inside your rasterization loop:
