@@ -119,8 +119,9 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
     Eigen::Vector3f return_color = {0, 0, 0};
     if (payload.texture)
     {
+        auto coords = payload.tex_coords;
         // TODO: Get the texture value at the texture coordinates of the current fragment
-
+        return_color = payload.texture->getColor(coords.x(), coords.y());
     }
     Eigen::Vector3f texture_color;
     texture_color << return_color.x(), return_color.y(), return_color.z();
@@ -129,6 +130,7 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
     Eigen::Vector3f kd = texture_color / 255.f;
     Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);
 
+    // light{position, intensity}
     auto l1 = light{{20, 20, 20}, {500, 500, 500}};
     auto l2 = light{{-20, 20, 0}, {500, 500, 500}};
 
@@ -148,7 +150,23 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
     {
         // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
         // components are. Then, accumulate that result on the *result_color* object.
+        // r_2:距离的平方
+        auto r_2 = (light.position - point).dot(light.position - point);
 
+        auto light_dir = (light.position - point).normalized();
+        auto eye_dir = (eye_pos - point).normalized();
+        // 半程向量
+        auto h = (eye_dir + light_dir).normalized();
+
+        // 环境光
+        //cwiseProduct()：矩阵点对点相乘
+        auto La = ka.cwiseProduct(amb_light_intensity);
+        // 漫反射
+        auto Ld = kd.cwiseProduct(light.intensity / r_2) * std::max(0.0f, normal.dot(light_dir));
+        // 镜面反射
+        auto Ls = ks.cwiseProduct(light.intensity / r_2) * std::pow(std::max(0.0f, normal.dot(h)), p);
+
+        result_color += (La + Ld + Ls);
     }
 
     return result_color * 255.f;
@@ -160,6 +178,7 @@ Eigen::Vector3f phong_fragment_shader(const fragment_shader_payload& payload)
     Eigen::Vector3f kd = payload.color;
     Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);
 
+    // // light{position, intensity}
     auto l1 = light{{20, 20, 20}, {500, 500, 500}};
     auto l2 = light{{-20, 20, 0}, {500, 500, 500}};
 
@@ -171,14 +190,31 @@ Eigen::Vector3f phong_fragment_shader(const fragment_shader_payload& payload)
 
     Eigen::Vector3f color = payload.color;
     Eigen::Vector3f point = payload.view_pos;
-    Eigen::Vector3f normal = payload.normal;
+    Eigen::Vector3f normal = payload.normal.normalized();
 
     Eigen::Vector3f result_color = {0, 0, 0};
     for (auto& light : lights)
     {
         // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
         // components are. Then, accumulate that result on the *result_color* object.
-        
+        // r_2:距离的平方
+        auto r_2 = (light.position - point).dot(light.position - point);
+
+        // Q. 为什么是light.position - point来代表光线方向的呢？究竟光线方向是从光源到着色点，还是着色点到光源？
+        auto light_dir = (light.position - point).normalized();
+        auto eye_dir = (eye_pos - point).normalized();
+        // 半程向量
+        auto h = (eye_dir + light_dir).normalized();
+
+        // 环境光
+        //cwiseProduct()：矩阵点对点相乘，即两个Vector3f的每个位置对应相乘
+        auto La = ka.cwiseProduct(amb_light_intensity);
+        // 漫反射
+        auto Ld = kd.cwiseProduct(light.intensity / r_2) * std::max(0.0f, normal.dot(light_dir));
+        // 镜面反射
+        auto Ls = ks.cwiseProduct(light.intensity / r_2) * std::pow(std::max(0.0f, normal.dot(h)), p);
+
+        result_color += (La + Ld + Ls);
     }
 
     return result_color * 255.f;
