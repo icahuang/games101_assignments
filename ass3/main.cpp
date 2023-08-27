@@ -127,6 +127,7 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
     texture_color << return_color.x(), return_color.y(), return_color.z();
 
     Eigen::Vector3f ka = Eigen::Vector3f(0.005, 0.005, 0.005);
+    // 为什么把纹理的颜色设置给kd？
     Eigen::Vector3f kd = texture_color / 255.f;
     Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);
 
@@ -208,6 +209,7 @@ Eigen::Vector3f phong_fragment_shader(const fragment_shader_payload& payload)
 
         // 环境光
         //cwiseProduct()：矩阵点对点相乘，即两个Vector3f的每个位置对应相乘
+        // cwise - coefficient wise
         auto La = ka.cwiseProduct(amb_light_intensity);
         // 漫反射
         auto Ld = kd.cwiseProduct(light.intensity / r_2) * std::max(0.0f, normal.dot(light_dir));
@@ -295,13 +297,31 @@ Eigen::Vector3f bump_fragment_shader(const fragment_shader_payload& payload)
 
     // TODO: Implement bump mapping here
     // Let n = normal = (x, y, z)
+    auto x = normal.x();
+    auto y = normal.y();
+    auto z = normal.z();
     // Vector t = (x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z))
+    Vector3f t = Vector3f(x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z));
     // Vector b = n cross product t
+    auto b = normal.cross(t);
     // Matrix TBN = [t b n]
+    MatrixXf TBN(3,3);
+    TBN << t, b, normal;
+
+    auto u = payload.tex_coords.x();
+    auto v = payload.tex_coords.y();
+    auto w = payload.texture->width;
+    auto h = payload.texture->height;
+
     // dU = kh * kn * (h(u+1/w,v)-h(u,v))
     // dV = kh * kn * (h(u,v+1/h)-h(u,v))
+    float dU = kh * kn * (payload.texture->getColor(u + 1.0f / w, v).norm() - payload.texture->getColor(u, v).norm());
+    float dV = kh * kn * (payload.texture->getColor(u, v + 1.0f / h).norm() - payload.texture->getColor(u, v).norm());
     // Vector ln = (-dU, -dV, 1)
+    auto ln = Vector3f(-dU, -dV, 1);
     // Normal n = normalize(TBN * ln)
+    normal = (TBN * ln).normalized();
+    // ENDTODO
 
 
     Eigen::Vector3f result_color = {0, 0, 0};
