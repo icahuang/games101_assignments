@@ -257,6 +257,35 @@ Eigen::Vector3f displacement_fragment_shader(const fragment_shader_payload& payl
     // Position p = p + kn * n * h(u,v)
     // Normal n = normalize(TBN * ln)
 
+    // Let n = normal = (x, y, z)
+    auto x = normal.x();
+    auto y = normal.y();
+    auto z = normal.z();
+    // Vector t = (x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z))
+    Vector3f t = Vector3f(x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z));
+    // Vector b = n cross product t
+    auto b = normal.cross(t);
+    // Matrix TBN = [t b n]
+    MatrixXf TBN(3,3);
+    TBN << t, b, normal;
+
+    auto u = payload.tex_coords.x();
+    auto v = payload.tex_coords.y();
+    auto w = payload.texture->width;
+    auto h = payload.texture->height;
+
+    // dU = kh * kn * (h(u+1/w,v)-h(u,v))
+    // dV = kh * kn * (h(u,v+1/h)-h(u,v))
+    float dU = kh * kn * (payload.texture->getColor(u + 1.0f / w, v).norm() - payload.texture->getColor(u, v).norm());
+    float dV = kh * kn * (payload.texture->getColor(u, v + 1.0f / h).norm() - payload.texture->getColor(u, v).norm());
+    // Vector ln = (-dU, -dV, 1)
+    auto ln = Vector3f(-dU, -dV, 1);
+    // Position p = p + kn * n * h(u,v)
+    point += kn * normal * payload.texture->getColor(u, v).norm();
+    // Normal n = normalize(TBN * ln)
+    normal = (TBN * ln).normalized();
+    // ENDTODO
+
 
     Eigen::Vector3f result_color = {0, 0, 0};
 
@@ -264,7 +293,25 @@ Eigen::Vector3f displacement_fragment_shader(const fragment_shader_payload& payl
     {
         // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
         // components are. Then, accumulate that result on the *result_color* object.
+         // r_2:距离的平方
+        auto r_2 = (light.position - point).dot(light.position - point);
 
+        // Q. 为什么是light.position - point来代表光线方向的呢？究竟光线方向是从光源到着色点，还是着色点到光源？
+        auto light_dir = (light.position - point).normalized();
+        auto eye_dir = (eye_pos - point).normalized();
+        // 半程向量
+        auto h = (eye_dir + light_dir).normalized();
+
+        // 环境光
+        //cwiseProduct()：矩阵点对点相乘，即两个Vector3f的每个位置对应相乘
+        // cwise - coefficient wise
+        auto La = ka.cwiseProduct(amb_light_intensity);
+        // 漫反射
+        auto Ld = kd.cwiseProduct(light.intensity / r_2) * std::max(0.0f, normal.dot(light_dir));
+        // 镜面反射
+        auto Ls = ks.cwiseProduct(light.intensity / r_2) * std::pow(std::max(0.0f, normal.dot(h)), p);
+
+        result_color += (La + Ld + Ls);
 
     }
 
