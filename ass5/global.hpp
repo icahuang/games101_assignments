@@ -13,6 +13,7 @@ inline float clamp(const float& lo, const float& hi, const float& v)
     return std::max(lo, std::min(hi, v));
 }
 
+// solveQuadratic() - 解二元一次方程，结果保存在x0和x1
 inline bool solveQuadratic(const float& a, const float& b, const float& c, float& x0, float& x1)
 {
     float discr = b * b - 4 * a * c;
@@ -47,6 +48,7 @@ inline float get_random_float()
     return dist(rng);
 }
 
+// 显示进度条
 inline void UpdateProgress(float progress)
 {
     int barWidth = 70;

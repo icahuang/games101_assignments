@@ -229,10 +229,16 @@ void Renderer::Render(const Scene& scene)
             // vector that passes through it.
             // Also, don't forget to multiply both of them with the variable *scale*, and
             // x (horizontal) variable with the *imageAspectRatio*            
-
+            // 这里你需要为每个像素生成一条对应的光线，然后调用函数castRay() 来得到颜色，
+            // 最后将颜色存储在帧缓冲区的相应像素中
+            x = (((i + 0.5f) / (float)scene.width) * 2 - 1) * scale * imageAspectRatio;
+            y = (-((j + 0.5f) / (float)scene.height) * 2 + 1) * scale;
+            // x = (((i + 0.5f) / scene.width) * 2 - 1) * scale * imageAspectRatio;
+            // y = (((j + 0.5f) / scene.height) * 2 - 1) * scale;
             Vector3f dir = Vector3f(x, y, -1); // Don't forget to normalize this direction!
             framebuffer[m++] = castRay(eye_pos, dir, scene, 0);
         }
+        // 更新进度条
         UpdateProgress(j / (float)scene.height);
     }
 
