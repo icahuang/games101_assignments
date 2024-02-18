@@ -9,6 +9,8 @@
 #include <cassert>
 #include <array>
 
+/* v0, v1, v2 是三角形的三个顶点，orig 是光线的起点，dir 是光线单位化的方向向量。
+ tnear, u, v 是你需要使用我们课上推导的Moller-Trumbore 算法来更新的参数。*/
 bool rayTriangleIntersect(const Vector3f& v0, const Vector3f& v1,
                           const Vector3f& v2, const Vector3f& orig,
                           const Vector3f& dir, float& tnear, float& u, float& v)
@@ -215,26 +217,31 @@ inline Intersection Triangle::getIntersection(Ray ray)
     if (dotProduct(ray.direction, normal) > 0)
         return inter;
     double u, v, t_tmp = 0;
-    Vector3f pvec = crossProduct(ray.direction, e2);
-    double det = dotProduct(e1, pvec);
+    Vector3f pvec = crossProduct(ray.direction, e2); // pvec = s1
+    double det = dotProduct(e1, pvec);  // det = div
     if (fabs(det) < EPSILON)
         return inter;
 
     double det_inv = 1. / det;
-    Vector3f tvec = ray.origin - v0;
-    u = dotProduct(tvec, pvec) * det_inv;
+    Vector3f tvec = ray.origin - v0;    // tvec = s
+    u = dotProduct(tvec, pvec) * det_inv;   // u = b1
     if (u < 0 || u > 1)
         return inter;
     Vector3f qvec = crossProduct(tvec, e1);
-    v = dotProduct(ray.direction, qvec) * det_inv;
+    v = dotProduct(ray.direction, qvec) * det_inv;  // v = b2
     if (v < 0 || u + v > 1)
         return inter;
     t_tmp = dotProduct(e2, qvec) * det_inv;
 
     // TODO find ray triangle intersection
-
-
-
+    if (t_tmp < 0)
+        return inter;
+    inter.happened = true;
+    inter.coords = ray(t_tmp);
+    inter.distance = t_tmp;
+    inter.normal = normal;
+    inter.obj = this;
+    inter.m = m;
 
     return inter;
 }
