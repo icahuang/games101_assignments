@@ -28,6 +28,7 @@ class Bounds3
     }
 
     Vector3f Diagonal() const { return pMax - pMin; }
+    // 返回包围盒的哪个方向(x or y or z)最长
     int maxExtent() const
     {
         Vector3f d = Diagonal();
@@ -44,7 +45,7 @@ class Bounds3
         Vector3f d = Diagonal();
         return 2 * (d.x * d.y + d.x * d.z + d.y * d.z);
     }
-
+    // Centroid - 重心
     Vector3f Centroid() { return 0.5 * pMin + 0.5 * pMax; }
     Bounds3 Intersect(const Bounds3& b)
     {
@@ -89,7 +90,7 @@ class Bounds3
 };
 
 
-
+// 判断光线与当前包围盒是否相交
 inline bool Bounds3::IntersectP(const Ray& ray, const Vector3f& invDir,
                                 const std::array<int, 3>& dirIsNeg) const
 {
@@ -97,6 +98,39 @@ inline bool Bounds3::IntersectP(const Ray& ray, const Vector3f& invDir,
     // dirIsNeg: ray direction(x,y,z), dirIsNeg=[int(x>0),int(y>0),int(z>0)], use this to simplify your logic
     // TODO test if ray bound intersects
     
+    // x
+    auto t_x_min = (pMin.x - ray.origin.x) * invDir[0];
+    auto t_x_max = (pMax.x - ray.origin.x) * invDir[0];
+    // y
+    auto t_y_min = (pMin.y - ray.origin.y) * invDir[1];
+    auto t_y_max = (pMax.y - ray.origin.y) * invDir[1];
+    // z
+    auto t_z_min = (pMin.z - ray.origin.z) * invDir[2];
+    auto t_z_max = (pMax.z - ray.origin.z) * invDir[2];
+    
+    // 如果方向为负方向，就交换最早和最晚的时间
+    if (dirIsNeg[0])
+    {
+        std::swap(t_x_min, t_x_max);
+    }
+    if (dirIsNeg[1])
+    {
+        std::swap(t_y_min, t_y_max);
+    }
+    if (dirIsNeg[2])
+    {
+        std::swap(t_z_min, t_z_max);
+    }
+    
+    // 求光线的进入时间t_enter和出去时间t_exit
+    float t_enter = std::max(std::max(t_x_min, t_y_min), t_z_min);
+    float t_exit = std::min(std::min(t_x_max, t_y_max), t_z_max);
+    // 根据t_enter和t_exit，判断是否跟盒子相交
+    if (t_enter < t_exit && t_exit >= 0)
+        return true;        
+
+    // std::cout << dirIsNeg[0] << " " << dirIsNeg[1] << " " << dirIsNeg[2] << std::endl;
+    return false;
 }
 
 inline Bounds3 Union(const Bounds3& b1, const Bounds3& b2)

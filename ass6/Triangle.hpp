@@ -218,24 +218,24 @@ inline Intersection Triangle::getIntersection(Ray ray)
     if (dotProduct(ray.direction, normal) > 0)
         return inter;
     double u, v, t_tmp = 0;
-    Vector3f pvec = crossProduct(ray.direction, e2); // pvec = s1
-    double det = dotProduct(e1, pvec);  // det = div
+    Vector3f s1 = crossProduct(ray.direction, e2); // pvec = s1
+    double div = dotProduct(e1, s1);  // det = div
     // 如果除数等于0则代表无解
-    if (fabs(det) < EPSILON)
+    if (fabs(div) < EPSILON)
         return inter;
 
-    double det_inv = 1. / det;
-    Vector3f tvec = ray.origin - v0;    // tvec = s
-    u = dotProduct(tvec, pvec) * det_inv;   // u = b1
+    double det_inv = 1. / div;
+    Vector3f s = ray.origin - v0;    // tvec = s
+    u = dotProduct(s, s1) * det_inv;   // u = b1
     // 不在三角形内的情况1
     if (u < 0 || u > 1)
         return inter;
-    Vector3f qvec = crossProduct(tvec, e1);
-    v = dotProduct(ray.direction, qvec) * det_inv;  // v = b2
+    Vector3f s2 = crossProduct(s, e1);    // qvec = s2
+    v = dotProduct(ray.direction, s2) * det_inv;  // v = b2
     // 不在三角形内的情况2
     if (v < 0 || u + v > 1)
         return inter;
-    t_tmp = dotProduct(e2, qvec) * det_inv;
+    t_tmp = dotProduct(e2, s2) * det_inv;
 
     // TODO find ray triangle intersection
     // t<0，说明三角形在射线出发点的后方，不符合条件
