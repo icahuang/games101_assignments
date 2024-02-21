@@ -108,7 +108,8 @@ inline bool Bounds3::IntersectP(const Ray& ray, const Vector3f& invDir,
     auto t_z_min = (pMin.z - ray.origin.z) * invDir[2];
     auto t_z_max = (pMax.z - ray.origin.z) * invDir[2];
     
-    // 如果方向为负方向，就交换最早和最晚的时间
+    // 如果方向为负方向，就交换最早和最晚的时间。
+    // 因为如果方向是负的，又因为t_x_min和t_y_max都是正数，
     if (dirIsNeg[0])
     {
         std::swap(t_x_min, t_x_max);
