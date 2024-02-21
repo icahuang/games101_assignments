@@ -14,8 +14,15 @@ int main(int argc, char** argv)
     Scene scene(1280, 960);
 
     MeshTriangle bunny("../models/bunny/bunny.obj");
+    MeshTriangle rock("../models/rock/rock.obj");
+    MeshTriangle cube("../models/cube/cube.obj");
+    MeshTriangle cow("../models/cow/cow.obj");
 
     scene.Add(&bunny);
+    scene.Add(&rock);
+    scene.Add(&cube);
+    scene.Add(&cow);
+
     scene.Add(std::make_unique<Light>(Vector3f(-20, 70, 20), 1));
     scene.Add(std::make_unique<Light>(Vector3f(20, 70, 20), 1));
     scene.buildBVH();
