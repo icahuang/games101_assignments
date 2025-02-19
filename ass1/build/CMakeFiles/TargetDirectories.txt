@@ -1,3 +1,0 @@
-/home/icahuang/Desktop/assignment/ass1/build/CMakeFiles/rebuild_cache.dir
-/home/icahuang/Desktop/assignment/ass1/build/CMakeFiles/Rasterizer.dir
-/home/icahuang/Desktop/assignment/ass1/build/CMakeFiles/edit_cache.dir

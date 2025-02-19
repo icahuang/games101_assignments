@@ -1,0 +1,3 @@
+/home/icahuang/games101_assignments/ass7/build/CMakeFiles/RayTracing.dir
+/home/icahuang/games101_assignments/ass7/build/CMakeFiles/edit_cache.dir
+/home/icahuang/games101_assignments/ass7/build/CMakeFiles/rebuild_cache.dir
