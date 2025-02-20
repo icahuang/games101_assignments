@@ -116,9 +116,11 @@ Intersection BVHAccel::getIntersection(BVHBuildNode* node, const Ray& ray) const
     dirIsNeg[2] = ray.direction.z > 0 ? 0 : 1;
     
     Intersection sec;
+    // 如果与包围盒不相交，则直接返回
     if (!node->bounds.IntersectP(ray, ray.direction_inv, dirIsNeg))
         return sec;
     
+    // 如果与包围盒相交，则利用BVH加速计算
     // if node is a leaf node
     if(node->left == nullptr && node->right == nullptr) {
         // test intersection with all objs

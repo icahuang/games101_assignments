@@ -1,5 +1,5 @@
 CMakeFiles/RayTracing.dir/BVH.cpp.o: \
- /home/icahuang/games101_assignments/ass7/BVH.cpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/BVH.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/algorithm \
  /usr/include/c++/11/utility \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -99,7 +99,8 @@ CMakeFiles/RayTracing.dir/BVH.cpp.o: \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc \
  /usr/include/c++/11/pstl/execution_defs.h /usr/include/c++/11/cassert \
- /usr/include/assert.h /home/icahuang/games101_assignments/ass7/BVH.hpp \
+ /usr/include/assert.h \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/BVH.hpp \
  /usr/include/c++/11/atomic /usr/include/c++/11/bits/atomic_base.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -143,8 +144,8 @@ CMakeFiles/RayTracing.dir/BVH.cpp.o: \
  /usr/include/c++/11/bits/shared_ptr_atomic.h \
  /usr/include/c++/11/backward/auto_ptr.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h /usr/include/c++/11/ctime \
- /home/icahuang/games101_assignments/ass7/Object.hpp \
- /home/icahuang/games101_assignments/ass7/Vector.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Object.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Vector.hpp \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/bits/char_traits.h \
  /usr/include/c++/11/cstdint /usr/include/c++/11/bits/localefwd.h \
@@ -207,13 +208,13 @@ CMakeFiles/RayTracing.dir/BVH.cpp.o: \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
  /usr/include/c++/11/tr1/riemann_zeta.tcc \
- /home/icahuang/games101_assignments/ass7/global.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/global.hpp \
  /usr/include/c++/11/random /usr/include/c++/11/bits/random.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/opt_random.h \
  /usr/include/c++/11/bits/random.tcc /usr/include/c++/11/numeric \
  /usr/include/c++/11/bits/stl_numeric.h \
  /usr/include/c++/11/pstl/glue_numeric_defs.h \
- /home/icahuang/games101_assignments/ass7/Bounds3.hpp \
- /home/icahuang/games101_assignments/ass7/Ray.hpp \
- /home/icahuang/games101_assignments/ass7/Intersection.hpp \
- /home/icahuang/games101_assignments/ass7/Material.hpp
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Bounds3.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Ray.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Intersection.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Material.hpp

@@ -89,7 +89,7 @@ class Bounds3
 };
 
 
-
+// 判断光线是否跟包围盒相交
 inline bool Bounds3::IntersectP(const Ray& ray, const Vector3f& invDir,
                                 const std::array<int, 3>& dirIsNeg) const
 {

@@ -1,7 +1,7 @@
 CMakeFiles/RayTracing.dir/Vector.cpp.o: \
- /home/icahuang/games101_assignments/ass7/Vector.cpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Vector.cpp \
  /usr/include/stdc-predef.h \
- /home/icahuang/games101_assignments/ass7/Vector.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Vector.hpp \
  /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

@@ -1,0 +1,10 @@
+**/build/
+**/cmake-build-debug/
+**/CMakeFiles/
+CMakeCache.txt
+CMakeSettings.json
+**/build/
+**/cmake-build-debug/
+**/CMakeFiles/
+CMakeCache.txt
+CMakeSettings.json

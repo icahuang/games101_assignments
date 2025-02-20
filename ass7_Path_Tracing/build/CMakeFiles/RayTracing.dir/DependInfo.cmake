@@ -8,11 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/icahuang/games101_assignments/ass7/BVH.cpp" "CMakeFiles/RayTracing.dir/BVH.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/BVH.cpp.o.d"
-  "/home/icahuang/games101_assignments/ass7/Renderer.cpp" "CMakeFiles/RayTracing.dir/Renderer.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/Renderer.cpp.o.d"
-  "/home/icahuang/games101_assignments/ass7/Scene.cpp" "CMakeFiles/RayTracing.dir/Scene.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/Scene.cpp.o.d"
-  "/home/icahuang/games101_assignments/ass7/Vector.cpp" "CMakeFiles/RayTracing.dir/Vector.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/Vector.cpp.o.d"
-  "/home/icahuang/games101_assignments/ass7/main.cpp" "CMakeFiles/RayTracing.dir/main.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/main.cpp.o.d"
+  "/home/icahuang/games101_assignments/ass7_Path_Tracing/BVH.cpp" "CMakeFiles/RayTracing.dir/BVH.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/BVH.cpp.o.d"
+  "/home/icahuang/games101_assignments/ass7_Path_Tracing/Renderer.cpp" "CMakeFiles/RayTracing.dir/Renderer.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/Renderer.cpp.o.d"
+  "/home/icahuang/games101_assignments/ass7_Path_Tracing/Scene.cpp" "CMakeFiles/RayTracing.dir/Scene.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/Scene.cpp.o.d"
+  "/home/icahuang/games101_assignments/ass7_Path_Tracing/Vector.cpp" "CMakeFiles/RayTracing.dir/Vector.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/Vector.cpp.o.d"
+  "/home/icahuang/games101_assignments/ass7_Path_Tracing/main.cpp" "CMakeFiles/RayTracing.dir/main.cpp.o" "gcc" "CMakeFiles/RayTracing.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links.

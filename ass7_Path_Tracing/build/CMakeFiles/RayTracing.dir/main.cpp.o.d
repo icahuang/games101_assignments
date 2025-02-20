@@ -1,8 +1,8 @@
 CMakeFiles/RayTracing.dir/main.cpp.o: \
- /home/icahuang/games101_assignments/ass7/main.cpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/main.cpp \
  /usr/include/stdc-predef.h \
- /home/icahuang/games101_assignments/ass7/Renderer.hpp \
- /home/icahuang/games101_assignments/ass7/Scene.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Renderer.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Scene.hpp \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -45,7 +45,7 @@ CMakeFiles/RayTracing.dir/main.cpp.o: \
  /usr/include/c++/11/bits/hash_bytes.h \
  /usr/include/c++/11/bits/range_access.h \
  /usr/include/c++/11/bits/vector.tcc \
- /home/icahuang/games101_assignments/ass7/Vector.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Vector.hpp \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
  /usr/include/c++/11/bits/stringfwd.h /usr/include/c++/11/bits/postypes.h \
@@ -195,20 +195,20 @@ CMakeFiles/RayTracing.dir/main.cpp.o: \
  /usr/include/c++/11/bits/unordered_map.h \
  /usr/include/c++/11/bits/erase_if.h \
  /usr/include/c++/11/pstl/execution_defs.h \
- /home/icahuang/games101_assignments/ass7/Object.hpp \
- /home/icahuang/games101_assignments/ass7/global.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Object.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/global.hpp \
  /usr/include/c++/11/random /usr/include/c++/11/bits/random.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/opt_random.h \
  /usr/include/c++/11/bits/random.tcc /usr/include/c++/11/numeric \
  /usr/include/c++/11/bits/stl_numeric.h /usr/include/c++/11/bit \
  /usr/include/c++/11/pstl/glue_numeric_defs.h \
- /home/icahuang/games101_assignments/ass7/Bounds3.hpp \
- /home/icahuang/games101_assignments/ass7/Ray.hpp \
- /home/icahuang/games101_assignments/ass7/Intersection.hpp \
- /home/icahuang/games101_assignments/ass7/Material.hpp \
- /home/icahuang/games101_assignments/ass7/Light.hpp \
- /home/icahuang/games101_assignments/ass7/AreaLight.hpp \
- /home/icahuang/games101_assignments/ass7/BVH.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Bounds3.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Ray.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Intersection.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Material.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Light.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/AreaLight.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/BVH.hpp \
  /usr/include/c++/11/atomic /usr/include/c++/11/bits/atomic_base.h \
  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
  /usr/include/c++/11/memory \
@@ -221,14 +221,14 @@ CMakeFiles/RayTracing.dir/main.cpp.o: \
  /usr/include/c++/11/bits/shared_ptr_atomic.h \
  /usr/include/c++/11/backward/auto_ptr.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h /usr/include/c++/11/ctime \
- /home/icahuang/games101_assignments/ass7/Triangle.hpp \
- /home/icahuang/games101_assignments/ass7/OBJ_Loader.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Triangle.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/OBJ_Loader.hpp \
  /usr/include/c++/11/optional /usr/include/c++/11/fstream \
  /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/math.h \
  /usr/include/c++/11/cassert /usr/include/assert.h \
- /home/icahuang/games101_assignments/ass7/Sphere.hpp \
+ /home/icahuang/games101_assignments/ass7_Path_Tracing/Sphere.hpp \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/bits/parse_numbers.h
