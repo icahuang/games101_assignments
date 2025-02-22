@@ -6,13 +6,32 @@
 #include "global.hpp"
 #include <chrono>
 
+std::random_device rd;
+  //std::default_random_engine random(time(NULL));
+std::mt19937 rng(rd());
+std::uniform_real_distribution<float> dist(0.f, 1.f);
+
+
 // In the main function of the program, we create the scene (create objects and
 // lights) as well as set the options for the render (image width and height,
 // maximum recursion depth, field-of-view, etc.). We then call the render
 // function().
 int main(int argc, char** argv)
 {
+//   std::random_device rd;
+//   //std::default_random_engine random(time(NULL));
+//   std::mt19937 rng(rd());
+//   std::uniform_real_distribution<float> dist(0.f, 1.f);
+//   for(int n=0; n<20000; ++n) {
+//       std::cout << dist(rng) << std::endl;
+//   }
+    
 
+
+    // for(int i = 0; ;i++) {
+    //     float p = get_random_float();
+    //     std::cout << p << std::endl;
+    // }
     // Change the definition here to change resolution
     Scene scene(784, 784);
 
